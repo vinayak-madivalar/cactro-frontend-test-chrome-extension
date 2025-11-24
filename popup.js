@@ -1,7 +1,4 @@
-// popup.js - Handles the UI logic for the extension popup
-
 document.addEventListener("DOMContentLoaded", () => {
-  // Check for CSP errors in development environment. This will be visible in the popup's console.
   console.log("Popup script started. Checking for chrome.storage access...");
 
   const listContainer = document.getElementById("highlight-list");
@@ -37,12 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
     hideConfirmation();
   };
 
-  // --- Core Logic ---
-
-  /**
-   * Deletes a highlight by ID and re-renders the list.
-   * @param {string} id - The unique ID of the highlight to delete.
-   */
   function deleteHighlight(id) {
     if (typeof chrome.storage === "undefined") {
       console.error(
@@ -56,9 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /**
-   * Renders the list of highlights into the popup UI.
-   */
   function renderHighlights() {
     listContainer.innerHTML = "";
     loadingMessage.style.display = "none";
@@ -76,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Attempting to retrieve highlights...");
 
     chrome.storage.local.get({ highlights: [] }, (result) => {
-      const highlights = result.highlights.reverse(); // Show newest first
+      const highlights = result.highlights.reverse();
 
       console.log(`Highlights retrieved. Count: ${highlights.length}`);
 
@@ -90,29 +78,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
       highlights.forEach((highlight) => {
         const item = document.createElement("div");
-        // Use CSS classes defined in popup.html's <style> block
+
         item.className = "highlight-item";
         item.setAttribute("data-id", highlight.id);
 
-        // Highlight Text
         const text = document.createElement("p");
-        // Use a combination of styling for text display
+
         text.className = "text-sm text-gray-800 mb-2 text-truncate";
         text.textContent = highlight.text;
         item.appendChild(text);
 
-        // Source Link/Date
         const footer = document.createElement("div");
         footer.className =
           "flex justify-between items-center text-xs text-gray-500 mt-1";
 
         const sourceLink = document.createElement("a");
-        // Use URL to get just the hostname for cleaner display
+
         try {
           const urlObj = new URL(highlight.url);
           sourceLink.textContent = urlObj.hostname;
           sourceLink.href = highlight.url;
-          sourceLink.target = "_blank"; // Open link in new tab
+          sourceLink.target = "_blank";
           sourceLink.className = "link";
           footer.appendChild(sourceLink);
         } catch (e) {
@@ -122,10 +108,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Delete Button
         const deleteBtn = document.createElement("button");
-        // Updated: SVG now uses the CSS class defined in popup.html
+
         deleteBtn.innerHTML =
           '<svg class="delete-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>';
-        // Updated: Button now uses the CSS class defined in popup.html
+
         deleteBtn.className = "delete-button";
         deleteBtn.onclick = (e) => {
           e.stopPropagation();
@@ -158,7 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial render when the popup opens
   renderHighlights();
 
-  // Set up a listener for storage changes
   if (typeof chrome.storage !== "undefined") {
     chrome.storage.onChanged.addListener((changes) => {
       if (changes.highlights) {

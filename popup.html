@@ -2,29 +2,28 @@
 <html>
   <head>
     <title>Saved Highlights</title>
-    <!-- REMOVED: <script src="https://cdn.tailwindcss.com"></script> to comply with CSP -->
+
     <style>
-      /* Basic CSS styles replacing required Tailwind utilities for CSP compliance */
       body {
-        width: 320px; /* w-80 (320px) */
-        padding: 16px; /* p-4 */
-        background-color: #f9fafb; /* bg-gray-50 */
-        font-family: ui-sans-serif, system-ui, sans-serif; /* font-sans */
+        width: 320px;
+        padding: 16px;
+        background-color: #f9fafb;
+        font-family: ui-sans-serif, system-ui, sans-serif;
       }
       .highlight-item {
-        border-left: 4px solid #4f46e5; /* Indigo 600 */
-        background-color: white; /* bg-white */
-        padding: 12px; /* p-3 */
-        border-radius: 6px; /* rounded-md */
+        border-left: 4px solid #4f46e5;
+        background-color: white;
+        padding: 12px;
+        border-radius: 6px;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-          0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-sm */
+          0 1px 2px 0 rgba(0, 0, 0, 0.06);
         display: flex;
         flex-direction: column;
         transition: box-shadow 0.2s;
       }
       .highlight-item:hover {
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-          0 4px 6px -2px rgba(0, 0, 0, 0.05); /* hover:shadow-lg */
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
       }
       .highlight-list {
         max-height: 400px;
@@ -33,10 +32,10 @@
         padding: 4px;
       }
       .header {
-        font-size: 1.25rem; /* text-xl */
-        font-weight: 700; /* font-bold */
-        color: #1f2937; /* text-gray-800 */
-        margin-bottom: 16px; /* mb-4 */
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 16px;
         display: flex;
         align-items: center;
       }
@@ -48,7 +47,7 @@
         -webkit-box-orient: vertical;
       }
       .link {
-        color: #6366f1; /* text-indigo-500 */
+        color: #6366f1;
         max-width: 60%;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -57,16 +56,16 @@
       .button-clear {
         margin-top: 16px;
         width: 100%;
-        background-color: #ef4444; /* bg-red-500 */
+        background-color: #ef4444;
         color: white;
         padding: 8px 16px;
-        border-radius: 8px; /* rounded-lg */
-        font-size: 0.875rem; /* text-sm */
-        font-weight: 500; /* font-medium */
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
         transition: background-color 0.15s;
       }
       .button-clear:hover {
-        background-color: #dc2626; /* hover:bg-red-600 */
+        background-color: #dc2626;
       }
 
       /* Modal Styles */
@@ -76,8 +75,8 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(75, 85, 99, 0.5); /* bg-gray-600 opacity-50 */
-        display: none; /* Controlled by JS */
+        background-color: rgba(75, 85, 99, 0.5);
+        display: none;
         align-items: center;
         justify-content: center;
       }
@@ -85,42 +84,39 @@
         background-color: white;
         padding: 24px;
         border-radius: 8px;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         width: 100%;
         max-width: 320px;
       }
 
-      /* Styles for the SVG icon in the header */
       .svg-icon {
-        width: 1.5rem; /* Tailwind size-6 */
-        height: 1.5rem; /* Tailwind size-6 */
-        stroke-width: 1.5; /* Tailwind stroke-width-1.5 */
+        width: 1.5rem;
+        height: 1.5rem;
+        stroke-width: 1.5;
       }
 
-      /* NEW: Styles for the delete button and icon */
       .delete-button {
-        margin-left: 0.5rem; /* ml-2 */
-        padding: 0.25rem; /* p-1 */
-        transition: all 150ms ease-in-out; /* transition duration-150 ease-in-out */
+        margin-left: 0.5rem;
+        padding: 0.25rem;
+        transition: all 150ms ease-in-out;
       }
 
       .delete-btn-icon {
-        width: 1rem; /* w-4 */
-        height: 1rem; /* h-4 */
-        color: #f87171; /* text-red-400 */
-        stroke-width: 2; /* stroke-width-2, based on the SVG definition */
+        width: 1rem;
+        height: 1rem;
+        color: #f87171;
+        stroke-width: 2;
         transition: color 150ms ease-in-out;
       }
 
       .delete-button:hover .delete-btn-icon {
-        color: #dc2626; /* hover:text-red-600 (applies to the child icon) */
+        color: #dc2626;
       }
     </style>
   </head>
   <body>
     <div id="app">
       <h1 class="header">
-        <!-- Applying the new class to the header SVG -->
         <svg
           class="svg-icon mr-2 text-indigo-600"
           fill="none"
@@ -139,7 +135,6 @@
       </h1>
 
       <div id="highlight-list" class="highlight-list space-y-3 p-1">
-        <!-- Highlights will be rendered here -->
         <p id="loading-message" class="text-sm text-gray-500">
           Loading highlights...
         </p>
@@ -171,7 +166,6 @@
       </div>
     </div>
 
-    <!-- NEW: Link to external JavaScript file -->
     <script src="popup.js"></script>
   </body>
 </html>
